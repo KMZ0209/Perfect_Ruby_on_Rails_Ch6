@@ -14,9 +14,9 @@ class EventsController < ApplicationController
   def create
     @event = current_user.created_events.build(event_params)
 
-    return unless @event.save
-
-    redirect_to @event, notice: '作成しました'
+    if @event.save
+      redirect_to @event, notice: "作成しました"
+    end
   end
 
   def edit
@@ -25,9 +25,9 @@ class EventsController < ApplicationController
 
   def update
     @event = current_user.created_events.find(params[:id])
-    return unless @event.update(event_params)
-
-    redirect_to @event, notice: '更新しました'
+    if @event.update(event_params)
+      redirect_to @event, notice: "更新しました"
+    end
   end
 
   def destroy
